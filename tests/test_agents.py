@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from task3_agentic.engine import ResearchSystem
+from task3_agentic.engine import ResearchSystem, compact_for_model
 from task3_agentic.schemas import AgentAction, MemoryAnswer
 from task3_agentic.tools import annualized_volatility
 
@@ -97,3 +97,24 @@ def test_volatility_independent_calculation():
     assert annualized_volatility(values,4)["annualized_volatility"]==pytest.approx(expected)
     with pytest.raises(ValueError,match="Need"):
         annualized_volatility(values,5)
+
+
+def test_model_view_reduces_size_without_mutating_evidence():
+    original={"id":"e1","data":{"ohlcv":[{"Close":100}]*20,"summary":{"latest_close":100},
+                                  "headlines":[{"title":"Real source title","url":"https://example.com/"+"x"*1000}]} }
+    before=json.dumps(original)
+    view=compact_for_model(original)
+    assert json.dumps(original)==before
+    assert view["id"]=="e1" and view["data"]["summary"]["latest_close"]==100
+    assert view["data"]["headlines"][0]["title"]=="Real source title"
+    assert len(json.dumps(view))<len(before)/2
+
+
+def test_sentiment_cannot_use_invented_headlines(tmp_path):
+    system=ResearchSystem(client=ScriptedClient(),tools=FixtureTools(),log_dir=tmp_path)
+    invented={"id":"made-up","title":"Invented earnings claim","source":"Fake",
+              "retrieved_at":"2026-01-01T00:00:00Z"}
+    result=system.dispatch("analyst","llm_sentiment",{"headlines":[invented]})
+    assert result["status"]=="error" and "previously retrieved" in result["error"]
+    actual=system.dispatch("writer","get_news",{"ticker":"AAPL","n":1})["data"]["headlines"]
+    assert system.dispatch("analyst","llm_sentiment",{"headlines":actual})["status"]=="ok"

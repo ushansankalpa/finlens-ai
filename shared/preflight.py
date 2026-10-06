@@ -5,6 +5,7 @@ import platform
 from importlib.metadata import version
 
 from shared.llm import JSONClient, LLMError
+from shared.config import load_environment
 from task1_financial.schemas import StrictModel
 
 
@@ -13,6 +14,7 @@ class SmokeResponse(StrictModel):
 
 
 def check(inference=False):
+    load_environment()
     report = {"python":platform.python_version(),"groq_key_configured":bool(os.getenv("GROQ_API_KEY")),
               "hf_token_configured":bool(os.getenv("HF_TOKEN")),
               "inference_model":os.getenv("GROQ_MODEL","openai/gpt-oss-20b"),

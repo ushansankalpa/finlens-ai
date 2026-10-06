@@ -17,7 +17,13 @@ $env:GROQ_MODEL = 'openai/gpt-oss-20b'
 .\.venv\Scripts\python.exe -m task1_financial.pipeline --ticker AAPL
 ```
 
-The key lives in that shell process and its children. `.env.example` is only a template; the implementation does not automatically load `.env` files.
+The key lives in that shell process and its children. Alternatively, put `GROQ_API_KEY` in a root `.env` file using `.env.example` as the template. The implementation now loads the four known settings from this file automatically; existing process environment values take precedence. `.env` is excluded from Git and the portable bundle.
+
+Check your setup without displaying credentials:
+
+```powershell
+.\.venv\Scripts\python.exe -m shared.preflight --inference
+```
 
 ## Colab GPU for Task 2
 

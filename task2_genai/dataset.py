@@ -12,6 +12,7 @@ import numpy as np
 
 from shared.io import utc_now, write_json
 from shared.llm import JSONClient, LLMError
+from shared.config import load_environment
 from task2_genai.domain import (STUDENT_SYSTEM, TEACHER_SYSTEM, TOPICS, Scenario,
                                 user_payload, validate_scenario)
 
@@ -33,6 +34,7 @@ def write_jsonl(path, records):
 
 
 def generate(output_dir="task2_genai/data", client=None, count=200, seed=42):
+    load_environment()
     if count < 100 or count % 20:
         raise ValueError("Count must be at least 100 and divisible by 20 for grouped 80/10/10 splitting")
     directory = Path(output_dir)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 from pathlib import Path
 
@@ -87,7 +88,8 @@ def main():
         result, _ = run(args.ticker, args.output_dir)
     except DataError as error:
         parser.exit(1, f"Data pipeline failed: {error}\n")
-    print(result.model_dump_json(indent=2))
+    # Keep Windows consoles safe for Unicode headlines/reasoning; artifacts stay UTF-8.
+    print(json.dumps(result.model_dump(mode="json"), indent=2, ensure_ascii=True))
     if result.signal is None or len(result.headlines) < MIN_HEADLINES or len(result.sentiments) < len(result.headlines):
         parser.exit(2, "Partial execution: check report warnings; assessment evidence incomplete.\n")
 

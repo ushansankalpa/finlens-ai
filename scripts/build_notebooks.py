@@ -202,7 +202,7 @@ except ValueError as error:
         md("## Model card and optional publication step\nSet the repository ID and enable publication only after inspecting the model and results. No credentials appear in the notebook."),
         code('''from task2_genai.evaluate import publish
 import shutil
-if MERGED_DIR.exists():
+if MERGED_DIR.exists() and not (MERGED_DIR / "README.md").exists():
     shutil.copyfile("task2_genai/MODEL_CARD_TEMPLATE.md", MERGED_DIR / "README.md")
 if PUBLISH_MODEL:
     assert MODEL_REPO_ID and "/" in MODEL_REPO_ID, "Set your actual HF repository ID"

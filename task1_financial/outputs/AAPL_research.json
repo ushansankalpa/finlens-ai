@@ -1,0 +1,197 @@
+{
+  "summary": {
+    "ticker": "AAPL",
+    "as_of": "2026-10-05T00:00:00",
+    "currency": "USD",
+    "latest_close": 332.8900146484375,
+    "high_52w": 345.3399963378906,
+    "low_52w": 242.75922413209136,
+    "pe_ratio": 38.26032,
+    "ytd_return": 0.2278236486065146,
+    "momentum_signal": "mixed",
+    "adjustment_policy": "yfinance auto_adjust=True: adjusted OHLC",
+    "warnings": []
+  },
+  "indicators": {
+    "sma_50": 322.358330078125,
+    "sma_200": 289.0940975189209,
+    "rsi_14": 53.80707346624353,
+    "macd": 3.496140957013324,
+    "macd_signal": 4.570302948154639,
+    "macd_histogram": -1.074161991141315,
+    "bb_middle": 332.54100036621094,
+    "bb_upper": 345.8145907726146,
+    "bb_lower": 319.26740995980725
+  },
+  "headlines": [
+    {
+      "id": "765815807279b249",
+      "title": "Apple Inc. (AAPL) Stock Forecasts - Yahoo Finance",
+      "source": "Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNdEYxNmk5c2hGYVo2S3ZRTHZMS0hmTDlNdTMwQjJPQ2QwTkNISEpJTUNxUjlRMExnYUxqRG9hWU5iNkF3RUZXYTh2MHRkM0tmbzcxSnlpVTNUUXNHQnYzNnNEcWZVV3Y4Vk9NS0NDWXVjdHNpNkNGbzBuZUdDQ1phRGJGcVFNZHB0bmc?oc=5",
+      "published_at": "2026-10-06T12:01:01+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.405686+00:00"
+    },
+    {
+      "id": "a2bc27c04c6dcc9f",
+      "title": "Knollwood Investment Advisory LLC Trims Stock Holdings in Apple Inc. $AAPL - MarketBeat",
+      "source": "MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOX0Y1V2xwcmtzQ1dFZGx0OWtCVzdBYjZwTEdiS1JyTWJzVHhMWU1vZGFkaDZMZTVsZjFLZDZjWkwzOTVqSVlvbnZsaXN6NGNSNEdtTHhMZTlTejduSEZLSHBlYXM1RE1VZ19IMmdmTnlPNnppVVU4NTlDRGozbGY4OWRwX20yVmlMUW1hdGNCUG4xNWJNMnN0SjFSTmVxa0VCcDdUVHVZTnNZNGVBSS04d0ZodmJPWFdrQ09BUXpHRWZNcnQtWkpzeXRFb3lvQQ?oc=5",
+      "published_at": "2026-10-06T07:36:18+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.408447+00:00"
+    },
+    {
+      "id": "54c60602910e2f0a",
+      "title": "Apple Inc. $AAPL Shares Sold by SMART Wealth LLC - MarketBeat",
+      "source": "MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNZ083U3h2TU41Q0lGR2FaaUtSZ3ZUbm9GSENrXzlscWVGd01veXZoZXhKbmtWUnBxV0t2UGI4UTdjNXRsOHoyOFpSRlZmbDZjUDE0VlBXS2dxdEItRU9CSUtRNFNQLVhNRmMtSFUtczd5V2djdGlLSnN6ZWVPYUZIMzM1dF9FNnVUNC1RRG1tazJHT3E0bUp0OTFBa0RwczE4YWxGLXVDbXpFSVE?oc=5",
+      "published_at": "2026-10-06T07:32:15+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.410415+00:00"
+    },
+    {
+      "id": "71bc71215cc9d612",
+      "title": "Apple Inc. $AAPL Shares Sold by Conway Capital Management Inc. - MarketBeat",
+      "source": "MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNOVNtTHUtUi03Qm5jMy1HdzdCVnhOdFVGcEdtSkZTZTRzT0dDNF9aem9LRDRfQkxBWlRZX2FQX0Fxb1hHc21veUVNaTk0ejlVMEJKTnhOQ2lXbDJLam9CUVR1R0N5MW9BZGwteGJoeWlKQUdVNDdNNWJlTm1fb3ZQUS1nUnJCa2ktWTNLWnk1dFFzbFJBOHR3Rzc1MGR6Ukx1UTUtRzdaV3pUcUFjaF9CbGREck5Tb2tUN3U0Xw?oc=5",
+      "published_at": "2026-10-06T07:14:10+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.408404+00:00"
+    },
+    {
+      "id": "23cca6ee1b6f2504",
+      "title": "Apple (AAPL) executive chair Timothy D. Cook\u2019s trust sells shares and gifts 26,325. - Stock Titan",
+      "source": "Stock Titan",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQMjdPOFFIN2dMN3B6S3ZtLVhuU0ZDR3JIN3pQSVdZZXR3Mld0Q3VXUzJaM0tlT0VmR2Y5cS1YNGYwcXdmaGZZaVVNRkNUSEd4VkZHbnpjOHU3LVdaUXhwZGJDVkdjXzdxdU9Xc0xMR1ZSZ190UncwRVA3a3RkOXZIR3JaSktnMG5JQmgtdXpLbF9YX1ZJN0ZGbkp3cTFidy1CTFlkZURn?oc=5",
+      "published_at": "2026-10-05T22:43:13+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.403868+00:00"
+    },
+    {
+      "id": "8365901b5b5db5b5",
+      "title": "Apple (AAPL) withheld 52,854 shares for COO Sabih Khan's taxes; no shares were sold. - Stock Titan",
+      "source": "Stock Titan",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPZ2J1Wmp4MW9FS25PZ290ZE5CM3BYbm82MmdlVFIyWnVGcHBXMW00MTFOUG9XbzNENDJIREVTRmRuRjQwYkNwNjB3cV9yQnJ1Q3RnV0NMcnpxSHRFMjc1cXVGNjJyTUtaSnpuRGdhMXBJZW5SeW5heHk2Zzg4Wi1ULWlxM3FyZi1lTUo5TWkzSjNrVjF4bFRkRkFZdE5uV1dSbnVmdFV3?oc=5",
+      "published_at": "2026-10-05T22:32:34+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.405402+00:00"
+    },
+    {
+      "id": "236e2a71148dad36",
+      "title": "Congressman Who Loves Magnificent Seven Stocks Buys 3 Mag 7 Names in September - Benzinga",
+      "source": "Benzinga",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUHM5Szg2WjZTamNHVE9SYUlDT3ZFd1pFV0dqU2lfbEVtbC1pMDNIb1VTekFNQ3NpM0QxS0tsYnY5T29wSm0yR002bjdkU01ZaFpCUE9tWWZ1SnJ2eFhNWkNBeU5Vako5anJ6R3FiVk1GTTJwUFc0Tm5RNEdBUm1DNTNySWVZdTdQMFR6bDczYkZzUE04Y1VvWW0yTWRMcEZxQW02dnVnNFpheGRMTHdIdWpXd3FmUGxSZ3lRLWZ6SlRZMzh1bWlrREdLS3U?oc=5",
+      "published_at": "2026-10-05T22:29:15+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.404195+00:00"
+    },
+    {
+      "id": "851977060a8e78a5",
+      "title": "Apple Inc. $AAPL Stock Sold by Carter Financial Group INC. - MarketBeat",
+      "source": "MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQRjN2MUdCMTdiREdQbzdlZDc2MFp3UFhKMFBSNF9NdTJkRFpjTzVaaG5BZ3hNVW9kejRTZzF2TlVEQWR5U0JobGN0WUFxbWdFd0ZEcHVVS0l1VFc2WFFueEplZ3hJTFFCOXJIVmxuczE0Q2FzU3ZLWEtkRlBqbmU3SmtCc2FUckJSSERDUmg0LXlQcER5d1dVQko1UWN3c2hPNGRHVi1ZMDhkbEVxTkh6RmgyMktLcVk?oc=5",
+      "published_at": "2026-10-05T07:10:31+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.405846+00:00"
+    },
+    {
+      "id": "31eab95cfd0d6e3b",
+      "title": "Apple Inc. $AAPL Stock Sold by Athena Investment Management - MarketBeat",
+      "source": "MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNVm56MjBrWnNZVXkyUEJJclpta3RNek04Uy10QnN2S0czVGZJR2hGOEF0RC1EN1cwbUFBdVBjcXI3b0ZIelVNOUZ0VG5lZUt0M01kWDlwNXpvSTZsSFJyNHo0SHFGc1hnODBOQVFkNWc0VmcyMjBDejQ2Y09HQS1nMEprbTlJSWMzQmp4cDVyQmdWOC1xeFpETkhDZmZaT2F2ZVBHc3kyZE9KVjBxQ0RqblpZQWFtVXNIaWc?oc=5",
+      "published_at": "2026-10-05T07:10:31+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.405893+00:00"
+    },
+    {
+      "id": "a894a051e7795834",
+      "title": "Apple Inc. $AAPL Stock Sold by Allen Mooney & Barnes Investment Advisors LLC - MarketBeat",
+      "source": "MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxObFU1WVFzTks0Q2E1QVVMLVlRWm9acllFSGxZSHp3TVFWTjlqNTA2M2o2Z1lSVmtPRUw0QmdvXzZ3anJyVUdrTU1ZeUVTeHc5MDQwMm9rTzhxOVJYOHEtRXFBbDYtZEw5Y1ZvN29WQVJnWmxRSmpvTkpDdGhycDNfNUxxRDBzc2FsXzU4Mi1YZGs1d2VHaFdhUTZBTV96bG10end3Y3BETXgtWHdHNjNVR2dxSVo0YnNsOGV4dzBGeFVQSnQ2YXlRMHJDYTZKdw?oc=5",
+      "published_at": "2026-10-05T07:10:31+00:00",
+      "retrieved_at": "2026-10-06T20:43:25.407314+00:00"
+    }
+  ],
+  "sentiments": {
+    "765815807279b249": {
+      "headline": "Apple Inc. (AAPL) Stock Forecasts - Yahoo Finance",
+      "sentiment": "neutral",
+      "confidence": 0.8,
+      "brief_reason": "The headline merely states that stock forecasts are available; it contains no positive or negative language or implied sentiment."
+    },
+    "a2bc27c04c6dcc9f": {
+      "headline": "Knollwood Investment Advisory LLC Trims Stock Holdings in Apple Inc. $AAPL - MarketBeat",
+      "sentiment": "neutral",
+      "confidence": 0.8,
+      "brief_reason": "The headline reports a change in holdings without indicating a positive or negative outlook on Apple\u2019s prospects; it simply states a reduction in investment, which is neutral."
+    },
+    "54c60602910e2f0a": {
+      "headline": "Apple Inc. $AAPL Shares Sold by SMART Wealth LLC - MarketBeat",
+      "sentiment": "neutral",
+      "confidence": 0.9,
+      "brief_reason": "The headline merely reports a sale of Apple shares by a firm, with no implied positive or negative market impact."
+    },
+    "71bc71215cc9d612": {
+      "headline": "Apple Inc. $AAPL Shares Sold by Conway Capital Management Inc. - MarketBeat",
+      "sentiment": "negative",
+      "confidence": 0.7,
+      "brief_reason": "The headline reports a sale of Apple shares by a management firm, which typically signals a negative view or profit-taking, indicating a bearish sentiment."
+    },
+    "23cca6ee1b6f2504": {
+      "headline": "Apple (AAPL) executive chair Timothy D. Cook\u2019s trust sells shares and gifts 26,325. - Stock Titan",
+      "sentiment": "neutral",
+      "confidence": 0.9,
+      "brief_reason": "The headline reports a factual transaction involving share sales and gifts by an executive\u2019s trust, lacking any positive or negative evaluative language."
+    },
+    "8365901b5b5db5b5": {
+      "headline": "Apple (AAPL) withheld 52,854 shares for COO Sabih Khan's taxes; no shares were sold. - Stock Titan",
+      "sentiment": "neutral",
+      "confidence": 0.9,
+      "brief_reason": "The headline reports a factual event (share withholding) without positive or negative language."
+    },
+    "236e2a71148dad36": {
+      "headline": "Congressman Who Loves Magnificent Seven Stocks Buys 3 Mag 7 Names in September - Benzinga",
+      "sentiment": "neutral",
+      "confidence": 0.8,
+      "brief_reason": "The headline reports a factual purchase by a congressman without using emotive or evaluative language, so it conveys a neutral financial sentiment."
+    },
+    "851977060a8e78a5": {
+      "headline": "Apple Inc. $AAPL Stock Sold by Carter Financial Group INC. - MarketBeat",
+      "sentiment": "neutral",
+      "confidence": 0.8,
+      "brief_reason": "The headline merely reports a transaction without indicating performance or market sentiment, so it is neutral."
+    },
+    "31eab95cfd0d6e3b": {
+      "headline": "Apple Inc. $AAPL Stock Sold by Athena Investment Management - MarketBeat",
+      "sentiment": "neutral",
+      "confidence": 0.9,
+      "brief_reason": "The headline reports a factual transaction (a sale of Apple stock by Athena Investment Management) without any evaluative language indicating positive or negative sentiment."
+    },
+    "a894a051e7795834": {
+      "headline": "Apple Inc. $AAPL Stock Sold by Allen Mooney & Barnes Investment Advisors LLC - MarketBeat",
+      "sentiment": "neutral",
+      "confidence": 0.9,
+      "brief_reason": "The headline merely reports a sale of Apple stock by a firm, containing no evaluative language or implied performance, thus it is neutral."
+    }
+  },
+  "aggregate_sentiment": -0.08333333333333333,
+  "signal": {
+    "recommendation": "Hold",
+    "justification": "The price is above both the 50\u2011day and 200\u2011day simple moving averages, indicating a bullish trend, but the MACD is below its signal line and the histogram is negative, suggesting short\u2011term bearish momentum. The RSI is moderately above 50 at 53.8, which is not an extreme overbought level, and the price sits just above the Bollinger middle band, far from the upper band, so no breakout is evident. These mixed signals create uncertainty, so a Hold recommendation is appropriate.",
+    "evidence_identifiers": [
+      "sma_50",
+      "sma_200",
+      "rsi_14",
+      "macd",
+      "macd_signal",
+      "macd_histogram",
+      "bb_middle"
+    ]
+  },
+  "warnings": [],
+  "metadata": {
+    "retrieved_at": "2026-10-06T20:43:33.244802+00:00",
+    "provider": "Groq",
+    "model": "openai/gpt-oss-20b",
+    "source": "yfinance and RSS",
+    "first_bar": "2023-10-06T00:00:00",
+    "last_bar": "2026-10-05T00:00:00",
+    "row_count": 751,
+    "inference_calls": 11,
+    "valid_sentiments": 10,
+    "failed_sentiments": 0
+  }
+}

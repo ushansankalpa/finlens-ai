@@ -74,3 +74,72 @@ class AgentAction(StrictModel):
 class MemoryAnswer(StrictModel):
     answer: str
     evidence_ids: list[str] = Field(min_length=1)
+
+
+class AnalystAction(AgentAction):
+    output: AnalystFinish | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_tool_output(cls, value):
+        if isinstance(value, dict) and value.get("action") == "tool" and value.get("output") == {}:
+            value = {**value, "output": None}
+        return value
+
+
+class WriterAction(AgentAction):
+    output: ResearchReport | ClarificationRequest | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_tool_output(cls, value):
+        if isinstance(value, dict) and value.get("action") == "tool" and value.get("output") == {}:
+            value = {**value, "output": None}
+        return value
+
+
+class ToolAction(StrictModel):
+    action: Literal["tool"]
+    rationale: str
+    tool_name: Literal["get_price_data", "get_news", "calculate_volatility", "llm_sentiment", "web_search"]
+    arguments: dict
+    output: None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def empty_output(cls, value):
+        if isinstance(value, dict) and value.get("output") == {}:
+            return {**value, "output": None}
+        return value
+
+
+class AnalystFinishAction(StrictModel):
+    action: Literal["finish"]
+    rationale: str
+    tool_name: None = None
+    arguments: dict = Field(default_factory=dict)
+    output: AnalystFinish
+
+
+class WriterFinishAction(StrictModel):
+    action: Literal["finish"]
+    rationale: str
+    tool_name: None = None
+    arguments: dict = Field(default_factory=dict)
+    output: ResearchReport
+
+
+class ClarifyAction(StrictModel):
+    action: Literal["clarify"]
+    rationale: str
+    tool_name: None = None
+    arguments: dict = Field(default_factory=dict)
+    output: ClarificationRequest
+
+
+class AnalystDecision(StrictModel):
+    decision: ToolAction | AnalystFinishAction
+
+
+class WriterDecision(StrictModel):
+    decision: ToolAction | WriterFinishAction | ClarifyAction

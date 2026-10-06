@@ -16,6 +16,10 @@ Scope: initial Python implementation in shared/, task1_financial/, task2_genai/,
 
 ## Documentation consulted during implementation
 
+AI-ASSISTED: OpenAI Codex (GPT-6; exact serving model identifier not exposed in this session), Prompt: 'i added gork api key to .env . what should i do next', Date: 2026-10-07
+
+Scope: added allowlisted root .env loading with environment precedence and secret-safe validation tests; verified a real Groq smoke response and completed Task 1 local live inference/notebook execution. Debugged Task 3 request size, typed decisions, role prompts, rejected-JSON repair and headline provenance. A preliminary live agent report remains unaccepted; later rate-limit failure and earlier invented-headline failure are preserved in the run audit. Fixed notebook publication setup so rerunning it preserves a personally edited model card. Credentials were not printed, copied into artifacts, or included in the code bundle. Execution evidence and documentation are updated from actual results.
+
 These primary sources were consulted for API behavior and design; no repository code snippets were copied:
 
 - https://console.groq.com/docs/structured-outputs - JSON-object versus schema modes and local validation needs.

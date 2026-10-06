@@ -2,11 +2,11 @@
 
 Spec: [task3-agentic.md](../specs/task3-agentic.md). Notebook: [assessment.ipynb](assessment.ipynb).
 
-Status: implementation and fixture-based control-flow verification exist; live LLM-driven agents and assessment trace remain pending a private Groq credential.
+Status: implementation and fixture checks pass. A preliminary live multi-agent report and actual trace exist, but news coverage and grounding remain incomplete. The next live attempt stopped on Groq HTTP 429. Single-agent, live memory/cache, failure-recovery and full notebook evidence remain pending. See logs/RUN_AUDIT.md; do not present preliminary results as a completed task.
 
 ```powershell
-.\.venv\Scripts\python.exe -m task3_agentic.engine --ticker AAPL --mode single --refresh
-.\.venv\Scripts\python.exe -m task3_agentic.engine --ticker AAPL --mode multi --refresh
+.\.venv\Scripts\python.exe -m task3_agentic.engine --ticker AAPL --mode single --refresh --model openai/gpt-oss-120b
+.\.venv\Scripts\python.exe -m task3_agentic.engine --ticker AAPL --mode multi --refresh --model openai/gpt-oss-120b
 ```
 
 The LangGraph loop alternates validated model decisions and actual observations. Tool order is not prescribed. Analyst can use only prices/volatility/sentiment; Writer can use only search/news. Typed DataBrief copies source observations using validated evidence IDs. Typed headlines can cross to Analyst for sentiment. Writer must execute one specific clarification before report finalization.

@@ -112,3 +112,10 @@ def test_signal_sentence_bounds_and_json_safety():
     with pytest.raises(ValidationError):
         Signal(recommendation="Buy", justification="One sentence.", evidence_identifiers=["rsi_14","macd"])
     assert json_safe({"x": float("nan"), "y": np.float64(float("inf"))}) == {"x": None, "y": None}
+
+
+def test_signal_rejects_unsupported_evidence_fields():
+    text = "The moving average trend remains positive. MACD momentum conflicts with that trend. RSI supports a cautious outlook."
+    with pytest.raises(ValidationError):
+        Signal(recommendation="Hold",justification=text,evidence_identifiers=["sma_50","invented_indicator"])
+    assert Signal(recommendation="Hold",justification=text,evidence_identifiers=["sma_50","macd_histogram"])

@@ -29,7 +29,8 @@ class HeadlineSentiment(StrictModel):
 class Signal(StrictModel):
     recommendation: Literal["Buy", "Hold", "Sell"]
     justification: str = Field(min_length=1)
-    evidence_identifiers: list[str] = Field(min_length=2)
+    evidence_identifiers: list[Literal["sma_50", "sma_200", "rsi_14", "macd", "macd_signal",
+                                      "macd_histogram", "bb_middle", "bb_upper", "bb_lower"]] = Field(min_length=2)
 
     @field_validator("justification")
     @classmethod

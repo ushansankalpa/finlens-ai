@@ -6,7 +6,7 @@ Spec-driven implementation of all three assessment tasks. Start with [SETUP.md](
 
 | Task | Implementation | Actual execution |
 |---|---|---|
-| [Financial AI](task1_financial/README.md) | Data/indicators/news, validated inference, report renderer | 751 real AAPL daily bars and ten recent headlines; locally executed data-only notebook; LLM pending |
+| [Financial AI](task1_financial/README.md) | Data/indicators/news, validated inference, report renderer | Live pipeline and locally executed notebook: 751 bars, ten validated sentiments, grounded recommendation, zero warnings |
 | [Generative AI](task2_genai/README.md) | Teacher/oracle validation, grouped split, NF4 QLoRA, merge, baseline metrics, review template | GPU training/evaluation and teacher generation pending |
 | [Agentic workflows](task3_agentic/README.md) | LangGraph decisions, five tools, restricted roles, typed critique, memory, trace | Fixture verification and local notebook execution; live stages explicitly skipped without credentials |
 

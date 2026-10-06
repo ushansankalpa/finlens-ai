@@ -16,12 +16,33 @@ from shared.io import json_safe, utc_now, write_json
 from shared.llm import JSONClient, LLMError
 from task1_financial.data import validate_ticker
 from task3_agentic.prompts import AGENT_SYSTEM, FOLLOWUP_SYSTEM
-from task3_agentic.schemas import AgentAction, AnalystFinish, ClarificationRequest, DataBrief, Evidence, MemoryAnswer, ResearchReport
+from task3_agentic.schemas import AnalystDecision, WriterDecision, AnalystFinish, ClarificationRequest, DataBrief, Evidence, MemoryAnswer, ResearchReport
 from task3_agentic.tools import ARG_SCHEMAS, ROLE_TOOLS, FinancialTools
 
 
 class AgentBudgetError(RuntimeError):
     pass
+
+
+def compact_for_model(value):
+    """Remove bulky duplicate/provenance fields only from the model's request view.
+
+    Full source observations, tool arguments and typed handoffs remain in state/logs.
+    Evidence IDs let the report refer back to those authoritative records.
+    """
+    if isinstance(value, list):
+        return [compact_for_model(item) for item in value]
+    if isinstance(value, dict):
+        result = {}
+        for key, item in value.items():
+            if key in {"ohlcv", "url", "href", "link"}:
+                continue
+            if key == "evidence" and isinstance(item, list) and item and isinstance(item[0], dict) and "id" in item[0]:
+                result["evidence"] = [{"id": entry["id"], "tool": entry["tool"]} for entry in item]
+            else:
+                result[key] = compact_for_model(item)
+        return result
+    return value
 
 
 class LoopState(TypedDict):
@@ -57,6 +78,14 @@ class ResearchSystem:
             if tool_name not in ROLE_TOOLS[role]:
                 raise PermissionError("Tool not permitted for this role")
             kwargs = ARG_SCHEMAS[tool_name].model_validate(arguments).model_dump()
+            if tool_name == "llm_sentiment":
+                known = {headline["id"]: headline for observation in self.observations
+                         if observation["status"] == "ok" and observation["tool"] == "get_news"
+                         for headline in observation["data"].get("headlines", [])}
+                requested = kwargs["headlines"]
+                if any(item["id"] not in known or item["title"] != known[item["id"]]["title"] for item in requested):
+                    raise ValueError("Sentiment needs previously retrieved headline IDs/titles; defer to Writer news handoff")
+                kwargs["headlines"] = [known[item["id"]] for item in requested]
             output = json_safe(getattr(self.tools, tool_name)(**kwargs))
             envelope = {"id": evidence_id, "tool": tool_name, "status": "ok", "data": output}
         except Exception as error:
@@ -79,6 +108,19 @@ class ResearchSystem:
 
     def _allowed_ids(self):
         return {entry["id"] for entry in self.observations if entry["status"] == "ok"}
+
+    def _model_messages(self):
+        # Observations are sent once in their own field, never duplicated in history.
+        messages = []
+        for message in self.messages:
+            if message["kind"] == "observation":
+                continue
+            payload = message["payload"]
+            if message["kind"] == "decision":
+                payload = {key: payload.get(key) for key in ["action", "tool_name", "rationale"]}
+            messages.append({"agent": message["agent"], "kind": message["kind"],
+                             "payload": compact_for_model(payload)})
+        return messages[-8:]
 
     def _validate_final(self, role, output):
         if role == "analyst":
@@ -117,22 +159,22 @@ class ResearchSystem:
         return {"request": request.model_dump(), "response": response}
 
     def _loop(self, role, query, context=None):
-        schema = AnalystFinish if role == "analyst" else ResearchReport
+        action_schema = AnalystDecision if role == "analyst" else WriterDecision
         system = AGENT_SYSTEM.format(role=role, tools=json.dumps({name: ARG_SCHEMAS[name].model_json_schema()
-                                        for name in sorted(ROLE_TOOLS[role])}),
-                                     output_schema=json.dumps(schema.model_json_schema()))
+                                        for name in sorted(ROLE_TOOLS[role])}))
 
         def decide(state):
             if state["steps"] >= self.max_steps:
                 raise AgentBudgetError(f"{role} exceeded {self.max_steps} decisions; see saved trace")
-            action = self.client.complete(AgentAction, system, {"query": query, "context": state["context"],
-                         "observations": self.observations, "recent_messages": self.messages[-12:],
-                         "clarification_count": self.clarification_count}, max_tokens=6000)
+            response = self.client.complete(action_schema, system, {"query": query, "context": compact_for_model(state["context"]),
+                         "observations": compact_for_model(self.observations), "recent_messages": self._model_messages(),
+                         "clarification_count": self.clarification_count}, max_tokens=2048)
+            action = getattr(response, "decision", response)
             self._trace_message(role, "decision", action)
             return {"action": action.model_dump(), "steps": state["steps"] + 1}
 
         def execute(state):
-            action = AgentAction.model_validate(state["action"])
+            action = action_schema.model_validate({"decision": state["action"]}).decision
             context = dict(state["context"])
             try:
                 if action.action == "tool":
@@ -167,7 +209,7 @@ class ResearchSystem:
         ticker = validate_ticker(ticker)
         if mode not in {"single", "multi"}:
             raise ValueError("Mode must be single or multi")
-        config = hashlib.sha256(json.dumps({"schema": 1, "model": self.client.model,
+        config = hashlib.sha256(json.dumps({"schema": 4, "model": self.client.model,
                                             "mode": mode, "max_steps": self.max_steps}, sort_keys=True).encode()).hexdigest()[:12]
         today = datetime.now(timezone.utc).date().isoformat()
         cache = self.cache_dir / ticker / f"{today}-{config}.json"
@@ -206,7 +248,7 @@ class ResearchSystem:
     def follow_up(self, question):
         before = self.tool_calls
         answer = self.client.complete(MemoryAnswer, FOLLOWUP_SYSTEM,
-                     {"question": question, "observations": self.observations, "messages": self.messages})
+                     {"question": question, "observations": compact_for_model(self.observations), "messages": self._model_messages()})
         if not set(answer.evidence_ids).issubset(self._allowed_ids()):
             raise ValueError("Memory response cites unobserved evidence")
         return {"answer": answer.model_dump(), "additional_tool_calls": self.tool_calls - before}
@@ -217,8 +259,9 @@ def main():
     parser.add_argument("--ticker", default="AAPL")
     parser.add_argument("--mode", choices=["single", "multi"], default="multi")
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument("--model", help="Optional Groq model override for agent decisions")
     args = parser.parse_args()
-    system = ResearchSystem()
+    system = ResearchSystem(client=JSONClient(model=args.model))
     try:
         result = system.run(args.ticker, args.mode, args.refresh)
     except (LLMError, AgentBudgetError, ValueError) as error:

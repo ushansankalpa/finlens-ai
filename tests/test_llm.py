@@ -57,3 +57,12 @@ def test_timeout_exhausts_transport_budget():
                        session=Session([requests.Timeout(), requests.Timeout()]), sleep=lambda _: None)
     with pytest.raises(LLMError, match="transport"):
         client.complete(HeadlineSentiment, "JSON", {})
+
+
+def test_provider_rejected_json_is_repaired_before_use():
+    class BackendRejected(Response):
+        def json(self):
+            return {"error":{"code":"json_validate_failed","message":"Invalid JSON","failed_generation":"{}"}}
+    client=JSONClient(api_key="test-only",session=Session([BackendRejected(status=400),Response(content=VALID)]))
+    assert client.complete(HeadlineSentiment,"JSON",{}).sentiment=="neutral"
+    assert client.calls==2
