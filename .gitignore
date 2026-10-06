@@ -1,0 +1,22 @@
+.venv/
+.uv-cache/
+.jupyter/
+.matplotlib/
+.hf-cache/
+dist/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+task2_genai/models/
+task2_genai/checkpoints/
+task3_agentic/cache/
+*.safetensors
+*.bin
+*Assessment*.pdf
+
+# Executed notebooks, reports and assessment traces intentionally remain tracked.

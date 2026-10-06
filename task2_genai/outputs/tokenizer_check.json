@@ -1,0 +1,8 @@
+{
+  "execution_stage": "real_tokenizer_only_no_training",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "total_tokens": 259,
+  "response_tokens": 45,
+  "complete_response_preserved": true,
+  "decoded_response": "{\"exception_type\":\"insufficient_information\",\"severity\":\"unknown\",\"evidence\":[\"units_available=None\"],\"recommended_action\":\"request_missing_data\",\"explanation\":\"Essential facts are missing, so no supported classification is possible.\"}<|im_end|>\n"
+}
